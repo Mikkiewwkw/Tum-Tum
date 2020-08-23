@@ -23,3 +23,5 @@ npm run build
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### 项目结构
+
+![Image text](https://github.com/Janetljy/TumTum/blob/master/refs/structure.pdf)

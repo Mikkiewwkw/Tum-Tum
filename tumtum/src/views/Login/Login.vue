@@ -13,8 +13,7 @@
       <img src="../../assets/svg/slump/inner-Vector.svg" />
     </div>
     <div class="slump-content">A SPACE OF YOUR OWN</div>
-  <!--    <div class="create-count-btn" @click="btnClick">CREATE ACCOUNT</div>-->
-    <button @click="btnClick">按钮</button>
+      <div class="create-count-btn" @click="btnClick">CREATE ACCOUNT</div>
   </div>
 </template>
 
@@ -23,7 +22,8 @@ export default {
   name: "Login",
   methods: {
     btnClick() {
-      alert("h");
+      this.$router.push("/createcount");
+      // console.log("Hello");
     },
   },
 };

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 const Login = () => import("../views/Login/Login");
 const CreateCount = () => import("../views/Login/childComponts/CreateCount")
+const OldUserLogin = () => import("../views/Login/childComponts/OldUserLogin")
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,11 @@ const routes = [
         path: "/createcount",
         name: "CreateCount",
         component: CreateCount,
+    },
+    {
+        path: "/userlogin",
+        name: "UserLogIn",
+        component: OldUserLogin,
     }
 ]
 

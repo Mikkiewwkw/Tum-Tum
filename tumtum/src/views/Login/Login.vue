@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="header-content">
-      <img src="../../assets/svg/LoginWelcome/Welcome.svg" />
+      WELCOME <span class="inner">TO <span class="ininner">TUMTUM</span></span>
     </div>
     <div class="out-side-vector">
       <img src="../../assets/svg/slump/outer-vector.svg" />
@@ -36,22 +36,34 @@ export default {
 
 <style scoped>
 @import "../../assets/css/public.css";
+
   .header-content {
     position: absolute;
-    width: 91%;
-    height: auto;
-    left: 9%;
-    top: 15%;
+    width: 300px;
+    height: 132px;
+    left: 10%;
+    top: 12%;
+    color: #533F22;
+
+    font-family: Bakso Sapi;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 64px;
+    line-height: 77px;
+    color: #533F22;
   }
-  .t-header {
-    font-size: 50px;
-    color: green;
+  .inner {
+    font-size: 47px;
+  }
+  .ininner {
+    color: #7C8D5F;
   }
   .out-side-vector {
     position: absolute;
     width: 291px;
     height: 246px;
-    left: 33px;
+    /*left: 33px;*/
+    left: 10%;
     top: 275px;
     z-index: 1;
   }
@@ -59,7 +71,7 @@ export default {
     position: absolute;
     width: 237px;
     height: 200px;
-    left: 58px;
+    left: 17% ;
     top: 292px;
     z-index: 2;
   }
@@ -67,7 +79,7 @@ export default {
     position: absolute;
     width: 188px;
     height: 164px;
-    left: 84px;
+    left: 24%;
     top: 306px;
     z-index: 3;
   }
@@ -75,7 +87,7 @@ export default {
     position: absolute;
     width: 151px;
     height: 66px;
-    left: 109px;
+    left: 33%;
     top: 344px;
 
     font-family: "Bakso Sapi";

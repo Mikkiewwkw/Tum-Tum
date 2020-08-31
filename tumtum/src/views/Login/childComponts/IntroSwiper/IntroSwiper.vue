@@ -24,9 +24,9 @@ export default {
   data() {
     return {
       imgList: [
-        {pic: 0, url: require("../../../../assets/img/Letter_&_Flowers.png"), content: introText.pic1},
-        {pic: 1, url: require("../../../../assets/img/EmotionBottle.png"), content: introText.pic2},
-        {pic: 2, url: require("../../../../assets/img/PrettyMushroom.png"), content: introText.pic3},
+        {pic: 0, url: require("../../../../assets/img/intro/Letter_&_Flowers.png"), content: introText.pic1},
+        {pic: 1, url: require("../../../../assets/img/intro/EmotionBottle.png"), content: introText.pic2},
+        {pic: 2, url: require("../../../../assets/img/intro/PrettyMushroom.png"), content: introText.pic3},
       ],
     };
   },

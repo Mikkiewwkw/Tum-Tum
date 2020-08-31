@@ -28,7 +28,7 @@ export default {
       this.$router.push("/createcount");
     },
     userLogin() {
-      this.$router.push("/userlogin");  
+      this.$router.push("/userlogin");
     }
   },
 };

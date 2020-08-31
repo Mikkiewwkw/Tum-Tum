@@ -10,7 +10,8 @@
         name: "CreateCount",
         methods: {
             btnClick() {
-                console.log("Hello");
+                // console.log("Hello");
+                this.$router.push("/intro");
             }
         }
     }

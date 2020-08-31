@@ -11,8 +11,9 @@
 <script>
     import Toast from "@/components/common/toast/Toast";
     import ToastItem from "./toastItem/ToastItem";
+
     export default {
-        name: "CreateCount",
+        name: "TestCreateCount",
         components: {
             Toast,
             ToastItem,

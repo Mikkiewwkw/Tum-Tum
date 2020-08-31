@@ -25,7 +25,7 @@ export default {
   name: "Login",
   methods: {
     btnClick() {
-      this.$router.push("/createcount");
+      this.$router.push("/testcreate");
     },
     userLogin() {
       this.$router.push("/userlogin");

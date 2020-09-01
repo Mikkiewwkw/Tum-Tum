@@ -1,93 +1,90 @@
 <template>
-	
-	
   <div class="start_menu">
     <div class="header-content">
-      <!-- <img src="tumtum/src/assets/svg/byj/Begin_Your_Journey.svg"/> -->
 	  <img :src="picture[0].url" />
-      <!-- <img :src="picture[0].url"/> -->
     </div>
     <div class="blob">
     		<img :src="picture[1].url"/>
     </div>
-    
-    
-   
     <div class="inputs">
-	   		<input type="text" name="first_name" id="first_name"  @input="firstname()" placeholder="FIRST NAME" style="width: 332px; height: 41px;left: 21px;top: 220px;background: #F4F4F4;border-radius: 10px;margin-bottom:20px;"/>
-
-	    		<!--<p>Message is: {{ message }}</p>?????????-->
-	    		<input type="text" name="last_name" id="last_name"  @input="lastname()" placeholder="LAST NAME" style="width: 332px; height: 41px;left: 21px;top: 220px;background: #F4F4F4;border-radius: 10px;margin-bottom:20px;"/>
-		    	<input type="text" name="email" id="email"  @input="email()" placeholder="EMAIL ADDRESS" style="width: 332px; height: 41px;left: 21px;top: 220px;background: #F4F4F4;border-radius: 10px;margin-bottom:20px;"/>
-		    	<input type="text" name="pswd" id="pswd"  @input="pswd()" placeholder="PASSWORD(8+CHARACTER)" style="width: 332px; height: 41px;left: 21px;top: 220px;background: #F4F4F4;border-radius: 10px;margin-bottom:20px;"/>
-		</div>
-	
-	
-		<div class="agreements">
-			BY CONTINUING, YOU AGREE TO TUMTUM'S <div @click="terms_and_conditions" id="t&c" style="color:#7C8D5F;"> TERMS AND CONDITIONS </div> AND <div @click="PRIVACY_POLICY" id="PP"style="color:#7C8D5F;"> PRIVACY POLICY
-			</div>
-		</div>
-	
-    		<div class="begin_button" @click="beginClick">BEGIN</div>
-    </div>
-    
-    
-  	
- 
+		<input class="input1" type="text" name="first_name" id="first_name" v-model="accountInfo.fn"  placeholder="FIRST NAME" />
+		<input class="input1" type="text" name="last_name" id="last_name" v-model="accountInfo.ln"  placeholder="LAST NAME" />
+		<input class="input1" type="text" name="email" id="email" v-model="accountInfo.email" placeholder="EMAIL ADDRESS" />
+		<input class="input1" type="text" name="pswd" id="pswd" v-model="accountInfo.pwd" placeholder="PASSWORD(8+CHARACTER)"/>
+	</div>
+	<div class="agreements">
+		BY CONTINUING, YOU AGREE TO TUMTUM'S
+		<span @click="terms_and_conditions" id="t&c" style="color:#7C8D5F; font-size:9px">
+			TERMS AND CONDITIONS
+		</span> AND <span @click="PRIVACY_POLICY" id="PP" style="color:#7C8D5F; font-size:9px">
+		PRIVACY POLICY
+		</span>
+	</div>
+	<div class="begin_button" @click="beginClick">
+		<img :src="picture[2].url">
+	</div>
+	<toast :isShow="isShow">
+	  <toast-item class="toast-item" slot="the-toast" @toastback="toastback"></toast-item>
+	</toast>
+  </div>
 </template>
 
 <script>
-export default {
-  name: "imgButton",
-  data(){
-  	return {
-      picture: [
-		{ pid: 0, url: require("/Users/Cholorophyll/Desktop/tum_tum/TumTum/tumtum/src/assets/svg/byj/Begin_Your_Journey.svg") },
-		{ pid: 2, url: require("/Users/Cholorophyll/Desktop/tum_tum/TumTum/tumtum/src/assets/svg/cute_blob/cute_blob.svg") },
+	import { NewAccount } from "../../../common/utils";
+	import Toast from "@/components/common/toast/Toast";
+	import ToastItem from "./toastItem/ToastItem";
 
-      ],
-    }
-  	
-  },
-  methods: {
-  	firstname(){
-  		
-  		let fn= this.first_name
-//		let fn=document.getElementsByClassName("first_name").value
-//router pass
-  		
-  		
-  	},
-  	
-    begin_button() {
-      this.$router.push("/begin");
-    },
-//  userLogin() {
-//    this.$router.push("/userlogin");  
-//  }
-  },
-};
+	export default {
+		name: "CreateCount",
+		components: {
+			Toast,
+			ToastItem
+		},
+		data() {
+			return {
+				picture: [
+					{ pid: 0, url: require("../../../assets/svg/byj/Begin_Your_Journey.svg") },
+					{ pid: 2, url: require("../../../assets/svg/cute_blob/cute_blob.svg") },
+					{ pid: 3, url: require("../../../assets/svg/LoginWelcome/begin_button.svg") },
+				],
+				accountInfo: {
+					fn: "",
+					ln: "",
+					email: "",
+					pwd: "",
+				},
+				isShow: false,
+				isBack: false,
+			}
+		},
+		methods: {
+			terms_and_conditions() {
+				console.log("terms_and_conditions");
+			},
+			PRIVACY_POLICY() {
+				console.log("PRIVACY_POLICY");
+			},
+			beginClick() {
+				let account = new NewAccount(this.accountInfo);
+				this.isShow = true;
+			},
+			toastback() {
+				this.isBack = true;
+				this.isShow = false;
+				console.log("GO BACK !!!");
+			}
+
+		}
+	}
 </script>
 
 <style scoped>
-@import imgButton from "../../assets/svg/wechat_icon/Vector.svg"
-
-
   .header-content {
-    position: absolute;
-	width: 299px;
-	height: 109px;
-	left: 32px;
-	top: 55px;
-
-	font-family: Bakso Sapi;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 48px;
-	line-height: 58px;
-
-
-	color: #533F22;
+	  position: absolute;
+	  width: 299px;
+	  height: 109px;
+	  left: 32px;
+	  top: 55px;
   }
   .blob{
   	position: absolute;
@@ -105,73 +102,92 @@ export default {
     margin:50px;
   	
   }
-  ::placeholder{
+  input::placeholder{
   	font-family: Bakso Sapi;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 18px;
-	line-height: 22px;
-	/* identical to box height */
-	
+	line-height: 30px;
 	text-decoration-line: underline;
 
-color: #848484;
-  	
+	color: #848484;
   }
-  .first_name{
+  #first_name{
+	  position: absolute;
+	  width: 332px;
+	  height: 41px;
+	  left: 21px;
+	  top: 220px;
+
+	  background: #F4F4F4;
+	  border-radius: 10px;
+	
+  }
+  #last_name {
+	  position: absolute;
+	  width: 332px;
+	  height: 39px;
+	  left: 21px;
+	  top: 288px;
+
+	  background: #F4F4F4;
+	  border-radius: 10px;
+  }
+  #email {
+	  position: absolute;
+	  width: 332px;
+	  height: 39px;
+	  left: 21px;
+	  top: 345px;
+
+	  background: #F4F4F4;
+	  border-radius: 10px;
+  }
+  #pswd {
+	  position: absolute;
+	  width: 332px;
+	  height: 39px;
+	  left: 21px;
+	  top: 406px;
+
+	  background: #F4F4F4;
+	  border-radius: 10px;
+  }
+  .agreements{
+	  position: absolute;
+	  width: 230px;
+	  height: 26px;
+	  left: 80px;
+	  top: 479px;
+
+	  font-family: Bakso Sapi;
+	  font-style: normal;
+	  font-weight: normal;
+	  font-size: 10px;
+	  line-height: 12px;
+
+	  color: #4A4A4A;
+  }
+  .begin_button {
+	  position: absolute;
+	  width: 110px;
+	  height: 110px;
+	  left: 127px;
+	  top: 533px;
+  }
+  .input1 {
 	width: 332px;
 	height: 41px;
 	left: 21px;
 	top: 220px;
 	background: #F4F4F4;
 	border-radius: 10px;
-	
+	margin-bottom:20px;
   }
-  
-  .agreements{
-  	position: absolute;
-	width: 213px;
-	height: 26px;
-	left: 80px;
-	top: 479px;
-	
-	font-family: Bakso Sapi;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 10px;
-	line-height: 12px;
-	
-	color: #4A4A4A;
-  }
-  .begin_button{
-  	position: absolute;
-	width: 110px;
-	height: 110px;
-	left: 127px;
-	top: 533px;
-	background: #EABFA7;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 30px;
 
-    font-family: Bakso Sapi;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 24px;
-    line-height: 95px;
-    text-align: center;
-    text-transform: uppercase;
+  .toast-item {
+	  position: absolute;
+	  left: 8%;
+  }
 
-    color: #4a4a4a;
-  }
-  .t&c{
-  	color: #7C8D5F;
-  }
-  .PP{
-  	color: #7C8D5F;
-  }
-  
-  
-  
-
- 
 </style>

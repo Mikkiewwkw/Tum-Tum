@@ -2,8 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 const Login = () => import("../views/Login/Login");
-const CreateCount = () => import("../views/Login/childComponts/CreateCount")
-const OldUserLogin = () => import("../views/Login/childComponts/OldUserLogin")
+// const CreateCount = () => import("../views/Login/childComponts/CreateCount");
+const TestCreateCount = () => import("../views/Login/childComponts/TestCreateCount");
+const OldUserLogin = () => import("../views/Login/childComponts/OldUserLogin");
+const Intro = () => import("../views/Login/childComponts/Intro");
 
 Vue.use(VueRouter)
 
@@ -18,14 +20,19 @@ const routes = [
         component: Login,
     },
     {
-        path: "/createcount",
-        name: "CreateCount",
-        component: CreateCount,
+        path: "/testcreate",
+        name: "TestCreate",
+        component: TestCreateCount,
     },
     {
         path: "/userlogin",
         name: "UserLogIn",
         component: OldUserLogin,
+    },
+    {
+        path: "/intro",
+        name: "Intro",
+        component: Intro,
     }
 ]
 

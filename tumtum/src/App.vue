@@ -6,12 +6,7 @@
 
 <script>
 export default {
-  name: "App",
-  methods: {
-    btnClick() {
-      console.log("Hello")
-    }
-  }
+  name: "App",  
 };
 </script>
 

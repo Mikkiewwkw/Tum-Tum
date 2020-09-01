@@ -12,16 +12,25 @@
                 <img :src="pictures.wechat.url">
             </div>
             <div id="webo" class="link-group-item">
-<!--                <img :src="pictures.svg.webo.url" id="webo-v">-->
+                <img :src="pictures.svg.webo.url" id="webo-v">
                 <img :src="pictures.webo.url">
             </div>
             <div id="facebook" class="link-group-item">
+                <img :src="pictures.svg.facebook.url" id="face-v">
                 <img :src="pictures.wechat.url">
             </div>
             <div id="ins" class="link-group-item">
+                <img :src="pictures.svg.ins.url" id="ins-v">
                 <img :src="pictures.webo.url">
             </div>
         </div>
+        <div class="enter-content">
+            DIRECTLY ENTER
+        </div>
+        <div class="enter" @click="btnClick">
+            <img :src="pictures.enter.url">
+        </div>
+
     </div>
 </template>
 
@@ -53,6 +62,9 @@
                         ins: {
                             url: require("../../../../assets/svg/icons/ins.svg")
                         }
+                    },
+                    enter: {
+                        url: require("../../../../assets/svg/toast/toast_enter.svg")
                     }
                 }
             }
@@ -60,6 +72,9 @@
         methods: {
             choice() {
                 this.$emit("toastback", true);
+            },
+            btnClick() {
+                this.$router.push("/intro");
             }
         },
     }
@@ -114,6 +129,50 @@
         top: 20%;
         vertical-align: center;
         z-index: 1;
+    }
+    #webo-v {
+        position: absolute;
+        left: 28%;
+        top: 20%;
+        vertical-align: center;
+        z-index: 1;
+    }
+    #face-v {
+        position: absolute;
+        left: 56%;
+        top: 20%;
+        vertical-align: center;
+        z-index: 1;
+    }
+    #ins-v {
+        position: absolute;
+        left: 79%;
+        top: 20%;
+        vertical-align: center;
+        z-index: 1;
+    }
+    .enter-content {
+        position: absolute;
+        width: 166px;
+        height: 30px;
+        left: 77px;
+        top: 170px;
+
+        font-family: Bakso Sapi;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        text-align: center;
+
+        color: #000000;
+    }
+    .enter {
+        position: absolute;
+        width: 85px;
+        height: 85px;
+        left: 115px;
+        top: 201px;
     }
 
 

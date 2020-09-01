@@ -121,6 +121,7 @@
 
 	  background: #F4F4F4;
 	  border-radius: 10px;
+	  border-width: 0;
 	
   }
   #last_name {
@@ -132,6 +133,7 @@
 
 	  background: #F4F4F4;
 	  border-radius: 10px;
+	  border-width: 0;
   }
   #email {
 	  position: absolute;
@@ -142,6 +144,7 @@
 
 	  background: #F4F4F4;
 	  border-radius: 10px;
+	  border-width: 0;
   }
   #pswd {
 	  position: absolute;
@@ -152,6 +155,7 @@
 
 	  background: #F4F4F4;
 	  border-radius: 10px;
+	  border-width: 0;
   }
   .agreements{
 	  position: absolute;
@@ -188,6 +192,7 @@
   .toast-item {
 	  position: absolute;
 	  left: 8%;
+	  top: 25%;
   }
 
-</style>
+</style>	

@@ -1,12 +1,20 @@
 <template>
-    <div class="slide">
+    <div class="slide" :style="slidWidth.width">
       <slot></slot>
     </div>
 </template>
 
 <script>
 	export default {
-		name: "Slide"
+		name: "Slide",
+        props: {
+		    slidWidth: {
+		        type: Object,
+                default() {
+                    return {};
+                }
+            }
+        },
 	}
 </script>
 

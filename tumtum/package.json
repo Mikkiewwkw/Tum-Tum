@@ -8,7 +8,10 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "swiper": "^6.1.2",
     "vue": "^2.6.11",
+    "vue-awesome-swiper": "^4.1.1",
+    "vue-carousel-3d": "^0.2.0",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
   },
@@ -17,6 +20,8 @@
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^10.0.1",
     "vue-svg-loader": "^0.16.0",
     "vue-template-compiler": "^2.6.11"
   },

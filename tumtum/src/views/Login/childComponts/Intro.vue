@@ -32,6 +32,7 @@
         methods: {
             btnClick() {
                 console.log(this.user_name);
+                this.$router.push("/avatar");
             }
         }
     }

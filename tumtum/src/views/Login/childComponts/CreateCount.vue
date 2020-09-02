@@ -109,6 +109,7 @@
 	font-size: 18px;
 	line-height: 30px;
 	text-decoration-line: underline;
+	text-indent: 10px;
 
 	color: #848484;
   }

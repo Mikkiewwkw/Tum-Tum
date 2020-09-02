@@ -23,7 +23,7 @@ export default {
   props: {
     interval: {
       type: Number,
-      default: 300000,
+      default: 1000,
     },
     animDuration: {
       type: Number,

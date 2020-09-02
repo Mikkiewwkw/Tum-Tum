@@ -1,6 +1,6 @@
 <template>
   <div>
-    <swiper>
+    <swiper :interval="30000000">
       <swiper-item v-for="(item, index) in imgList" :key="index">
         <div class="content">
           {{item.content}}

@@ -2,6 +2,9 @@
   "name": "TumTum-backend",
   "version": "0.0.1",
   "description": "Tumtum backend APIs",
+  "scripts": {
+    "dev": "nodemon --ignore node_modules index.js"
+  },
   "main": "index.js",
   "author": "TumTum-group",
   "dependencies": {

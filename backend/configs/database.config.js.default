@@ -1,0 +1,58 @@
+'use strict'
+
+const database = {
+  development: {
+    host: '',
+    username: '',
+    password: '',
+    port: 3306,
+    database: '',
+    params: ''
+  },
+  test: {
+    host: '',
+    username: '',
+    password: '',
+    port: 3306,
+    database: '',
+    params: ''
+  },
+  production: {
+    host: '',
+    username: '',
+    password: '',
+    port: 3306,
+    database: '',
+    params: ''
+  }
+};
+
+const pool = {
+  max: 10,
+  min: 0,
+  acquire: 30000,
+  idle: 10000
+};
+
+const tableConfig = {
+  freezeTableName: true,
+  timestamps: true,
+  paranoid: false
+};
+
+const exportConfig = {
+  development: {},
+  test: {},
+  production: {}
+};
+
+for (let k in exportConfig) 
+  exportConfig[k] = Object.assign(
+    database[k], 
+    // { dialect: 'mysql' },
+    { dialect: 'mariadb', dialectOptions: { timezone: 'Etc/GMT-5' } },
+    { pool: pool }, 
+    { define: tableConfig}
+  );
+
+module.exports = exportConfig;

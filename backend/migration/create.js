@@ -1,7 +1,6 @@
 'use strict'
 
 const model = require('../libs/model'),
-      password = require('../libs/password'),
       config = require('../configs');
 
 const bcrypt = require('bcrypt');
@@ -17,7 +16,7 @@ const bcrypt = require('bcrypt');
     let first_user = User.build({
       username: 'testuser',
       salt: salt,
-      pwd: pwd,
+      password: pwd,
     });  
     await first_user.save();
   } catch (err) {

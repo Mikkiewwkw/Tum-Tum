@@ -13,11 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       allowNull: false
     },
-    pwd: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    salt: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false
     },

@@ -9,8 +9,7 @@ const Avatar = () => import("../views/Avatar/Avatar")
 
 Vue.use(VueRouter)
 
-const routes = [
-    {
+const routes = [{
         path: "",
         redirect: "/login"
     },
@@ -42,8 +41,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes,
-  mode: "history",
+    routes,
+    mode: "hash",
 })
 
 export default router

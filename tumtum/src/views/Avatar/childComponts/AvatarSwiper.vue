@@ -1,95 +1,91 @@
 <template>
   <div>
-    <!-- <swiper class="swipe" :options="swiperOption">
+    <swiper class="swipe" :options="swiperOption" ref="theswipe">
       <swiper-slide
         class="siper-item"
         v-for="(item, index) in buddies"
         :key="index"
+        ref="theimg"
+
       >
-        <img :src="item.url" />
+        <div v-if="theIndex != item.index">
+          <img :src="item.url"/>
+        </div>
+
+        <div v-else class="set-div"></div>
       </swiper-slide>
-    </swiper> -->
-    <carousel-3d class="swipe" :width="300" :height="300" :border="0">
-      <slide
-        class="siper-item"
-        v-for="(item, i) in buddies"
-        :key="i"
-        :index="item.index"
-      >
-        <img :src="item.url" ref="theimg"
-      /></slide>
-    </carousel-3d>
+    </swiper>
   </div>
 </template>
 
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import { Carousel3d, Slide } from "vue-carousel-3d";
+import {debouncs} from "../../../common/utils";
+// import { Carousel3d, Slide } from "vue-carousel-3d";
 import "swiper/swiper-bundle.css";
+
 export default {
   name: "AvatarSwiper",
   components: {
     Swiper,
     SwiperSlide,
-    Carousel3d,
-    Slide,
+    // Carousel3d,
+    // Slide,
+  },
+  props: {
+    buddies: {
+      type: Array,
+      default: []
+    }
   },
   data() {
+    const vue = this;
     return {
-      buddies: {
-        bear: {
-          index: 0,
-          url: require("../../../assets/img/buddies/bear.png"),
-        },
-        deer: {
-          index: 1,
-          url: require("../../../assets/img/buddies/deer.png"),
-        },
-        fox: {
-          index: 2,
-          url: require("../../../assets/img/buddies/fox.png"),
-        },
-        hedgehog: {
-          index: 3,
-          url: require("../../../assets/img/buddies/hedgehog.png"),
-        },
-        owl: {
-          index: 4,
-          url: require("../../../assets/img/buddies/owl.png"),
-        },
-      },
       swiperOption: {
         slidesPerView: 3,
         spaceBetween: 18,
         freeMode: true,
         loop: true,
+        speed: 2000,
+        on: {
+          slideChange: debouncs(function() {
+            console.log(this);
+            if (this.realIndex + 1 == 5) {
+              vue.theIndex = 0;
+            } else {
+              vue.theIndex = this.realIndex + 1;
+            }
+            vue.$emit("active", vue.theIndex);
+
+          }, 500)
+        }
       },
-      position: 0,
+      theIndex: 1,
     };
   },
-  mounted() {
-    this.position = this.$refs.theimg;
-    console.log(this.position);
-  },
+  methods: {
+    theFunction(index) {
+      console.log(index);
+    }
+  }
 };
 </script>
 
-<style scoped lang="scss">
-.swiper {
-  position: relative;
-  width: 100%;
-}
-.siper-item img {
-  width: 200px;
-  height: 200px;
-  padding: 18%;
-}
-
-.carousel-3d {
-  width: 100%;
-}
-
-.carousel-3d-slide {
-  background-color: transparent;
-}
+<style scoped>
+  .swipe {
+    position: relative;
+    width: 100%;
+  }
+  .siper-item img {
+    width: 130px;
+    height: 130px;
+  }
+  .active img {
+    opacity:0.0;
+  }
+  /*.set-div {*/
+  /*  width: 130px;*/
+  /*  height: 130px;*/
+  /*  background: red;*/
+  /*}*/
 </style>

@@ -15,7 +15,7 @@ module.exports = (async (model, config) => {
       lastname: 'User',
       nickname: 'testuser',
       email: 'testuser@tumtum.com',
-      //phone: '1654230',
+      phone: '16542309181',
       password: pwd,
     });  
     first_user.setBuddy(buddy, { save: false });

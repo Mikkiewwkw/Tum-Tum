@@ -1,5 +1,5 @@
 <template>
-  <div class="start_menu">
+  <div class="start_menu"> 
     <div class="header-content">
 	  <img :src="picture[0].url" />
     </div>

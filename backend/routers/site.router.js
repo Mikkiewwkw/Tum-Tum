@@ -1,8 +1,10 @@
 'use strict'
 
 const bcrypt = require('bcrypt'),
+      jwt = require('jsonwebtoken'),
       Sequelize = require('sequelize'),
-      Op = Sequelize.Op;
+      Op = Sequelize.Op,
+      configs = require('../configs');
 
 const User = require('../libs/model').User;
 
@@ -47,9 +49,25 @@ router.
             user.password
           );
           if (cmp_result) {
+            let user_info = {
+              "name": user.username,
+	      "id": user.id
+	    };
+	    let token = await jwt.sign(
+	      user_info, 
+	      configs.site.tokenKey, 
+	      { expiresIn: '5d' }
+	    );
+	    let refresh_token = await jwt.sign(
+	      user_info, 
+	      configs.site.tokenKey, 
+	      { expiresIn: '60d' }
+	    );
+
             ctx.body.data = {
               "status": "success",
-              "token": "xxxxx"
+              "token": token,
+	      "refresh_token": refresh_token
             };
             userFound = true;
           }

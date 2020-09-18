@@ -7,6 +7,12 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
+    tid: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      unique: true,
+      allowNull: false
+    },
     firstname: {
       type: DataTypes.STRING,
       allowNull: false
@@ -19,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
-    nickname: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false
     },

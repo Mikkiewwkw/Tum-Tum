@@ -18,34 +18,26 @@ router.
     let data = ctx.request.body;
 
     if (data) {
-      let email = data.email, 
-          phone = data.phone,
+      let username = data.username,
           password = data.password;
       
       try {
         // TODO: probably add email/phone check before retrieval
         if ((password == undefined || password == '') || 
-            ((email == undefined || email == '') && (phone == undefined || phone == ''))) {
+            (username == undefined || username == '')) {
           let error = new Error('Invalid Input');
           error.name = 'InvalidInputError';
           throw error;
         }
         
-        console.log(data);
-        let whereStat = {};
-        if (email && phone && email.length > 0 && phone.length > 0) {
-          whereStat = {
-            [Op.or]: [
-              { email: email },
-              { phone: phone }
-            ],
-          };
-        } else {
-          if (email && email.length > 0)
-            whereStat = { email: email };
-          if (phone && phone.length > 0)
-            whereStat = { phone: phone };
-        }
+        //console.log(data);
+        let whereStat = {
+          [Op.or]: [
+	    { username: username },
+            { email: username },
+            { phone: username }
+          ],
+        };
         
         let user = await User.findOne({ where: whereStat }),
             userFound = false;

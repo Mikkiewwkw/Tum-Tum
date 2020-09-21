@@ -7,7 +7,7 @@
         <input class="input1" type="text" name="email" id="email" v-model="accountInfo.email" placeholder="EMAIL/USERNAME/PHONE NUMBER" />
         <input class="input1" type="text" name="pwd" id="pwd" v-model="accountInfo.pwd" placeholder="PASSWORD" />
     </div>
-    <div class="forget_password">
+    <div class="forget_password" @click="forgotPassword">
         FORGET PASSWORD?
     </div>
     <div class="login_button" @click="loginClick">
@@ -93,7 +93,10 @@ export default {
     methods: {
         loginClick: function () {
             console.log("You clicked log in");
-        }
+        },
+        forgotPassword: function(){
+            this.$router.push("/forgotPassword");
+        },
     }
 }
 </script>

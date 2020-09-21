@@ -4,20 +4,24 @@
       <span style="color: #6a593e;">FORGOT PASSWORD</span>
       <span style="color: #9dab86;">?</span>
     </div>
-    <div>
-      <span class="username" v-bind:style="isPhone?'color: #6a593e;':'color: #9dab86'">USERNAME</span>
-      <span class="phone" v-bind:style="isPhone?'color: #9dab86;':'color: #6a593e'">PHONE</span>
-    </div>
-    <div>
-      <span
+    <span v-on:click="useUsername">
+      <div class="username" v-bind:style="isPhone?'color: #6a593e;':'color: #9dab86'">USERNAME</div>
+      <div
         class="username_line"
         v-bind:style="isPhone?'border: 1px solid #6a593e;':'border: 1px solid #9dab86;'"
-      ></span>
-      <span
+      ></div>
+    </span>
+    <span v-on:click="usePhone">
+      <div class="phone" v-bind:style="isPhone?'color: #9dab86;':'color: #6a593e'">PHONE</div>
+      <div
         class="phone_line"
         v-bind:style="isPhone?'border: 1px solid #9dab86;':'border: 1px solid #6a593e;'"
-      ></span>
-    </div>
+      ></div>
+    </span>
+    <input class="input" type="text" v-model="emailOrText" v-bind:placeholder="placeholder" />
+    <button class="send_button" v-on:click="sendEmailOrText">{{buttonText}}</button>
+    <div class="help" v-on:click="needHelp">NEED MORE HELP?</div>
+    <div class="back" v-on:click="backToLogin">BACK TO LOGIN</div>
   </div>
 </template>
 
@@ -47,7 +51,7 @@ export default {
       console.log("need more help");
     },
     sendEmailOrText: function () {
-      console.log(emailOrText);
+      console.log(this.emailOrText);
     },
     backToLogin: function () {
       this.$router.go(-1);
@@ -94,14 +98,6 @@ export default {
   top: 243px;
 }
 
-.phone_line {
-  position: absolute;
-  width: 100px;
-  height: 0px;
-  left: 220px;
-  top: 243px;
-}
-
 .phone {
   position: absolute;
   width: 93px;
@@ -117,6 +113,14 @@ export default {
   text-align: center;
 }
 
+.phone_line {
+  position: absolute;
+  width: 100px;
+  height: 0px;
+  left: 220px;
+  top: 243px;
+}
+
 .input {
   position: absolute;
   width: 332px;
@@ -126,36 +130,81 @@ export default {
 
   background: #f4f4f4;
   border-radius: 10px;
+  border-style: none;
+
+  font-family: Bakso Sapi;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-indent: 15px;
+
+  color: #848484;
 }
 
-input::placeholder {
+.input::placeholder {
   font-family: Bakso Sapi;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
   text-decoration-line: underline;
+  text-indent: 15px;
 
   color: #848484;
 }
 
-.login_button {
+.send_button {
   position: absolute;
-  width: 110px;
-  height: 110px;
-  left: 72px;
-  top: 410px;
-}
+  width: 238px;
+  height: 55px;
+  left: 59px;
+  top: 387px;
 
-#login_background {
-  z-index: 1;
-}
+  background: #eabfa7;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  border-style: none;
 
-#login_text {
-  z-index: 2;
-  position: absolute;
-  top: 430px;
-  left: 157px;
+  font-family: Bakso Sapi;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 29px;
   text-align: center;
+
+  color: #4a4a4a;
+}
+
+.help {
+  position: absolute;
+  width: 138px;
+  height: 19px;
+  left: 109px;
+  top: 487px;
+
+  font-family: Bakso Sapi;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #9dab86;
+}
+
+.back {
+  position: absolute;
+  width: 118px;
+  height: 19px;
+  left: 125px;
+  top: 732px;
+
+  font-family: Bakso Sapi;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #e08f62;
 }
 </style>

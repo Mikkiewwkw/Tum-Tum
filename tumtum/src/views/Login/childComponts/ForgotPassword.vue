@@ -33,7 +33,11 @@
           <div>AN {{emailOrText}} HAS BEEN SENT TO YOU</div>
           <div>(THE LINK WILL EXPIRE IN 1 HOUR)</div>
         </div>
-        <div class="resend" v-on:click="sendEmailOrText">RESEND ({{times}}S)</div>
+        <div
+          class="resend"
+          v-on:click="sendEmailOrText"
+          v-bind:style="canSend?'color: #e08f62;':'color: #eabfa7'"
+        >{{canSend ? "RESEND NOW" : "RESEND ("+times+"S)"}}</div>
       </div>
     </template>
   </div>
@@ -291,7 +295,5 @@ export default {
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
-
-  color: #eabfa7;
 }
 </style>

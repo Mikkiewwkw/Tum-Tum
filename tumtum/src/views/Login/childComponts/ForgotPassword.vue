@@ -18,10 +18,24 @@
         v-bind:style="isPhone?'border: 1px solid #9dab86;':'border: 1px solid #6a593e;'"
       ></div>
     </span>
-    <input class="input" type="text" v-model="emailOrText" v-bind:placeholder="placeholder" />
-    <button class="send_button" v-on:click="sendEmailOrText">{{buttonText}}</button>
+    <input class="input" type="text" v-model="input" v-bind:placeholder="placeholder" />
+    <button class="send_button" v-on:click="sendEmailOrText">SEND {{emailOrText}}</button>
     <div class="help" v-on:click="needHelp">NEED MORE HELP?</div>
     <div class="back" v-on:click="backToLogin">BACK TO LOGIN</div>
+    <template v-if="isPopup">
+      <div class="popup">
+        <img
+          src="../../../assets/svg/LoginWelcome/back14.svg"
+          class="back_icon"
+          v-on:click="closePopup"
+        />
+        <div class="message">
+          <div>AN {{emailOrText}} HAS BEEN SENT TO YOU</div>
+          <div>(THE LINK WILL EXPIRE IN 1 HOUR)</div>
+        </div>
+        <div class="resend" v-on:click="sendEmailOrText">RESEND ({{times}}S)</div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -32,30 +46,50 @@ export default {
     return {
       isPhone: false,
       placeholder: "USERNAME OR EMAIL",
-      buttonText: "SEND EMAIL",
-      emailOrText: "",
+      emailOrText: "EMAIL",
+      input: "",
+      isPopup: false,
+      times: 60,
+      canSend: true,
     };
   },
   methods: {
     useUsername: function () {
       this.isPhone = false;
       this.placeholder = "USERNAME OR EMAIL";
-      this.buttonText = "SEND EMAIL";
+      this.emailOrText = "EMAIL";
     },
     usePhone: function () {
       this.isPhone = true;
       this.placeholder = "PHONE NUMBER";
-      this.buttonText = "SEND TEXT";
+      this.emailOrText = "TEXT";
     },
     needHelp: function () {
       console.log("need more help");
     },
     sendEmailOrText: function () {
-      console.log(this.emailOrText);
+      this.isPopup = true;
+      if (this.canSend) {
+        this.times = 60;
+        this.canSend = false;
+        this.timer = setInterval(() => {
+          this.times--;
+          if (this.times === 0) {
+            this.show = true;
+            clearInterval(this.timer);
+            this.canSend = true;
+          }
+        }, 1000);
+        console.log(this.input);
+      }
+    },
+    closePopup: function () {
+      this.isPopup = false;
     },
     backToLogin: function () {
       this.$router.go(-1);
     },
+    resend: function () {},
   },
 };
 </script>
@@ -206,5 +240,58 @@ export default {
   line-height: 19px;
 
   color: #e08f62;
+}
+
+.popup {
+  position: absolute;
+  width: 85.3%;
+  height: 39.4%;
+  left: 7.35%;
+  top: 30.3%;
+
+  background: #fffbf2;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+}
+
+.back_icon {
+  position: relative;
+  left: 3.75%;
+  right: 81.25%;
+  top: 4.69%;
+  bottom: 80.62%;
+}
+
+.message {
+  position: relative;
+  width: 84%;
+  height: 20.3%;
+  left: 8%;
+  top: 15%;
+
+  font-family: Bakso Sapi;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 200%;
+  text-align: center;
+
+  color: #4a4a4a;
+}
+
+.resend {
+  position: relative;
+  width: 37.5%;
+  height: 7.5%;
+  left: 31.5%;
+  top: 35%;
+
+  font-family: Bakso Sapi;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+
+  color: #eabfa7;
 }
 </style>

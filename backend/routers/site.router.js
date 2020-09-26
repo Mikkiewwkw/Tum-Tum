@@ -1,8 +1,10 @@
 'use strict'
 
 const bcrypt = require('bcrypt'),
+      jwt = require('jsonwebtoken'),
       Sequelize = require('sequelize'),
-      Op = Sequelize.Op;
+      Op = Sequelize.Op,
+      configs = require('../configs');
 
 const User = require('../libs/model').User;
 
@@ -18,34 +20,26 @@ router.
     let data = ctx.request.body;
 
     if (data) {
-      let email = data.email, 
-          phone = data.phone,
+      let username = data.username,
           password = data.password;
       
       try {
         // TODO: probably add email/phone check before retrieval
         if ((password == undefined || password == '') || 
-            ((email == undefined || email == '') && (phone == undefined || phone == ''))) {
+            (username == undefined || username == '')) {
           let error = new Error('Invalid Input');
           error.name = 'InvalidInputError';
           throw error;
         }
         
-        console.log(data);
-        let whereStat = {};
-        if (email && phone && email.length > 0 && phone.length > 0) {
-          whereStat = {
-            [Op.or]: [
-              { email: email },
-              { phone: phone }
-            ],
-          };
-        } else {
-          if (email && email.length > 0)
-            whereStat = { email: email };
-          if (phone && phone.length > 0)
-            whereStat = { phone: phone };
-        }
+        //console.log(data);
+        let whereStat = {
+          [Op.or]: [
+	    { username: username },
+            { email: username },
+            { phone: username }
+          ],
+        };
         
         let user = await User.findOne({ where: whereStat }),
             userFound = false;
@@ -55,9 +49,25 @@ router.
             user.password
           );
           if (cmp_result) {
+            let user_info = {
+              "name": user.username,
+	      "id": user.id
+	    };
+	    let token = await jwt.sign(
+	      user_info, 
+	      configs.site.tokenKey, 
+	      { expiresIn: '5d' }
+	    );
+	    let refresh_token = await jwt.sign(
+	      user_info, 
+	      configs.site.tokenKey, 
+	      { expiresIn: '60d' }
+	    );
+
             ctx.body.data = {
               "status": "success",
-              "token": "xxxxx"
+              "token": token,
+	      "refresh_token": refresh_token
             };
             userFound = true;
           }

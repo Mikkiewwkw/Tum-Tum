@@ -13,7 +13,7 @@ module.exports = (async (model, config) => {
     let first_user = User.build({
       firstname: 'Test',
       lastname: 'User',
-      nickname: 'testuser',
+      username: 'testuser',
       email: 'testuser@tumtum.com',
       phone: '16542309181',
       password: pwd,

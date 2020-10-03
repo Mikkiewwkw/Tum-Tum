@@ -1,0 +1,11 @@
+'use strict'
+
+const Rapid_SendGrid = {
+};
+
+const Rapid_SMS = {
+};
+
+module.exports.sendEmail = Rapid_SendGrid;
+module.exports.sendSMS = Rapid_SMS;
+

@@ -1,0 +1,30 @@
+'use strict'
+
+const cache = {
+  development: {
+    host: '',
+    port: 6379,
+    username: '',
+    password: '',
+    database: '',
+    params: ''
+  },
+  test: {
+    host: '',
+    port: 6379,
+    username: '',
+    password: '',
+    database: '',
+    params: ''
+  },
+  production: {
+    host: '',
+    port: 6379,
+    username: '',
+    password: '',
+    database: '',
+    params: ''
+  }
+};
+
+module.exports = cache;

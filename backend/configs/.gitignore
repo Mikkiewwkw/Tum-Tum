@@ -1,2 +1,4 @@
 database.config.js
 site.config.js
+cache.config.js
+service.config.js

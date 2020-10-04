@@ -1,20 +1,24 @@
 'use strict'
 
-const axios = require('axios');
+const axios = require('axios'),
+      sgMail = require('@sendgrid/mail'); 
+      
 
 const serviceConfig = require('../configs').service;
 
 module.exports.sendEmail = ((config) => {
-  return async (email, service="rapid") => {
+  return async (email, service="twilio") => {
     let error = new Error("Cannot reach the target email address.");
     error.name = "SendEmailFailedError";
     try {
-      const emailConfig = config.sendEmail;
+      let emailConfig = config.sendEmail;
       let res;
 
-      if (service == "rapidxxx") {
+      if (service == "xxx") {
+	emailConfig = emailConfig[service];
 
-      } else {
+      } else if (service == "rapid") {
+	emailConfig = emailConfig[service];
         let curEmailTo = [];
         for (let curTo of email.to)
           curEmailTo.push({ "email": curTo });
@@ -43,10 +47,19 @@ module.exports.sendEmail = ((config) => {
           },
           "data": curEmail
         };
-        //console.log(rapidSendgridReq);
         res = await axios(rapidSendgridReq);
+      } else {
+        emailConfig = emailConfig["twilio"];
+        sgMail.setApiKey(emailConfig.APIKey); 
+        const SendgridReq = {
+          from: email.from,
+          to: email.to,
+          subject: email.subject,
+          text: email.content
+        };
+        res = await sgMail.sendMultiple(SendgridReq);
+	//console.log(res);
       }
-      //console.log(res.data);
       return res;
     } catch (err) {
       console.log(err); 

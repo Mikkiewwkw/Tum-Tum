@@ -174,7 +174,8 @@ router
 	// Send code
         if (query.from == 'email') {
           let res = await emailService.sendEmail({
-            "from": "welcome@tumtum.dev",
+            //"from": "welcome@tumtum.dev",
+            "from": "tumtum-welcome@nyanpasu.me",
             "to": [ data.email ],
             "subject": "Please use the attached validation code to finish your registration",
             "content": sendMsg
@@ -184,7 +185,7 @@ router
             "to": data.phone,
             "content": sendMsg
 	  });
-         console.log(res);
+         //console.log(res);
 	}
         ctx.body.data = {
           "status": "success"

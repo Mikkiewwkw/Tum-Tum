@@ -50,7 +50,7 @@ export default {
         return {
             svg: {
                 wechat: {
-                    url: require("../../../assets/svg/LoginWelcome/WeChat.svg")
+                    url: require("../../../assets/svg/LoginWelcome/Wechat.svg")
                 },
                 weibo: {
                     url: require("../../../assets/svg/LoginWelcome/Weibo.svg")

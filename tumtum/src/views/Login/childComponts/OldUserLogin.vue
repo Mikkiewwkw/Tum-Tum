@@ -1,44 +1,42 @@
 <template>
 <div class="login_page">
     <div class="header-content">
-        <img :src="pictures.welcomeBack.url" />
+        <span style="color: #6A593E;">WELCOME BACK</span>
+        <span style="color: #9dab86;">:)</span>
     </div>
-    <div class="inputs">
-        <input class="input1" type="text" name="email" id="email" v-model="accountInfo.email" placeholder="EMAIL/USERNAME/PHONE NUMBER" />
-        <input class="input1" type="text" name="pwd" id="pwd" v-model="accountInfo.pwd" placeholder="PASSWORD" />
-    </div>
+    <form class="inputs">
+        <div class="form-group">
+            <input class="input" type="text" name="email" v-model="accountInfo.email" placeholder="EMAIL/USERNAME/PHONE NUMBER" />
+        </div>
+        <div class="form-group">
+            <input class="input" type="text" name="pwd" v-model="accountInfo.pwd" placeholder="PASSWORD" />
+        </div>
+    </form>
     <div class="forget_password" @click="forgotPassword">
         FORGET PASSWORD?
     </div>
-    <div class="login_button" @click="loginClick">
-        <img :src="pictures.loginBackground.url" id="login_background">
-    </div>
-    <img :src="pictures.login.url" id="login_text">
-
+    <button class="login_button">LOG iN</button>
     <div class="or">
         OR
     </div>
     <div class="third_party_sign_in row">
-        <p class="col-4" id="sign_in_with_text">SIGN IN WITH</p>
-        <div class="link-group col-8">
-            <div id="wechat" class="link-group-item col-3 wechat-icon">
-                <img :src="pictures.svg.wechat.url" id="wechat-v">
-                <img :src="pictures.wechatBackground.url" id="wechat-bg">
+        <p class="" id="sign_in_with_text">SIGN IN WITH</p>
+        <div class="link_group">
+            <div id="wechat" class="link-group-item wechat-icon">
+                <img :src="svg.wechat.url" alt="wechat" v-on:click={wechatLogin}>
             </div>
-            <div id="weibo" class="link-group-item col-3 weibo-icon">
-                <img :src="pictures.svg.weibo.url" id="weibo-v">
-                <img :src="pictures.weiboBackground.url" id="weibo-bg">
+            <div id="weibo" class="link-group-item weibo-icon">
+                <img :src="svg.weibo.url" alt="weibo" v-on:click={weiboLogin}>
             </div>
-            <div id="facebook" class="link-group-item col-3 facebook-icon">
-                <img :src="pictures.svg.facebook.url" id="facebook-v">
-                <img :src="pictures.wechatBackground.url" id="facebook-bg">
+            <div id="facebook" class="link-group-item facebook-icon">
+                <img :src="svg.facebook.url" alt="facebook" v-on:click={facebookLogin}>
             </div>
-            <div id="instagram" class="link-group-item col-3 instagram-icon">
-                <img :src="pictures.svg.instagram.url" id="instagram-v">
-                <img :src="pictures.weiboBackground.url" id="instagram-bg">
+            <div id="instagram" class="link-group-item instagram-icon">
+                <img :src="svg.ins.url" alt="instagram" v-on:click={insLogin}>
             </div>
         </div>
     </div>
+    <div class="back" v-on:click="backToCreateAcct">BACK TO CREATE ACCOUNT</div>
 </div>
 </template>
 
@@ -50,37 +48,19 @@ export default {
     name: "OldUserLogin",
     data() {
         return {
-            pictures: {
-                welcomeBack: {
-                    url: require("../../../assets/svg/LoginWelcome/Welcome_back.svg")
+            svg: {
+                wechat: {
+                    url: require("../../../assets/svg/LoginWelcome/WeChat.svg")
                 },
-                loginBackground: {
-                    url: require("../../../assets/svg/LoginWelcome/Rectangle 5.svg")
+                weibo: {
+                    url: require("../../../assets/svg/LoginWelcome/Weibo.svg")
                 },
-                login: {
-                    url: require("../../../assets/svg/LoginWelcome/Log in.svg")
+                facebook: {
+                    url: require("../../../assets/svg/LoginWelcome/Facebook.svg")
                 },
-                wechatBackground: {
-                    url: require("../../../assets/svg/LoginWelcome/Ellipse 7.svg")
-                },
-                weiboBackground: {
-                    url: require("../../../assets/svg/LoginWelcome/Ellipse 6.svg")
-                },
-                svg: {
-                    wechat: {
-                        url: require("../../../assets/svg/LoginWelcome/Wechat_login.svg")
-                    },
-                    weibo: {
-                        url: require("../../../assets/svg/LoginWelcome/Weibo_login.svg")
-                    },
-                    facebook: {
-                        url: require("../../../assets/svg/LoginWelcome/Facebook_login.svg")
-                    },
-                    instagram: {
-                        url: require("../../../assets/svg/LoginWelcome/Instagram_login.svg")
-                    }
+                ins: {
+                    url: require("../../../assets/svg/LoginWelcome/ins.svg")
                 }
-
             },
             accountInfo: {
                 fn: "",
@@ -94,9 +74,24 @@ export default {
         loginClick: function () {
             console.log("You clicked log in");
         },
-        forgotPassword: function(){
+        forgotPassword: function () {
             this.$router.push("/forgotPassword");
         },
+        wechatLogin: function () {
+            console.log("wechat log in");
+        },
+        weiboLogin: function () {
+
+        },
+        facebookLogin: function () {
+
+        },
+        insLogin: function () {
+
+        },
+        backToCreateAcct: function () {
+            this.$router.go(-1);
+        }
     }
 }
 </script>
@@ -108,56 +103,47 @@ export default {
     height: 109px;
     left: 32px;
     top: 55px;
-}
 
-input::placeholder {
     font-family: Bakso Sapi;
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
-    line-height: 30px;
-    text-decoration-line: underline;
-    text-indent: 10px;
-
-    color: #848484;
+    font-size: 48px;
+    line-height: 58px;
 }
 
-#email {
+.inputs {
     position: absolute;
-    width: 332px;
-    height: 41px;
-    left: 21px;
-    top: 220px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+}
 
+.input {
+    position: relative;
+    width: 332px;
+    height: 65px;
+    left: 23px;
+    top: 208px;
+
+    background: #F4F4F4;
+    border-radius: 10px;
+    border-style: none;
     font-family: Bakso Sapi;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 22px;
-
-    text-decoration-line: underline;
+    text-indent: 15px;
 
     color: #848484;
 }
 
-#pwd {
-    position: absolute;
-    width: 332px;
-    height: 41px;
-    left: 21px;
-    top: 288px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-
+.input::placeholder {
     font-family: Bakso Sapi;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 22px;
-
     text-decoration-line: underline;
+    text-indent: 15px;
+
     color: #848484;
 }
 
@@ -166,7 +152,7 @@ input::placeholder {
     width: 154px;
     height: 19px;
     left: 30px;
-    top: 355px;
+    top: 383px;
 
     font-family: Bakso Sapi;
     font-style: normal;
@@ -179,15 +165,27 @@ input::placeholder {
 
 .login_button {
     position: absolute;
-    width: 110px;
-    height: 110px;
+    width: 238px;
+    height: 55px;
     left: 72px;
-    top: 410px;
+    top: 429px;
+
+    background: #EABFA7;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    border-style: none;
+
+    font-family: Bakso Sapi;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    color: #4A4A4A;
 }
 
 #login_background {
     z-index: 1;
-
 }
 
 #login_text {
@@ -198,24 +196,12 @@ input::placeholder {
     text-align: center
 }
 
-/* .input1 {
-    position: absolute;
-    width: 332px;
-    height: 65px;
-    left: 23px;
-    top: 208px;
-
-    background: #F4F4F4;
-    border-radius: 10px;
-    margin-bottom: 20px;
-} */
-
 .or {
     position: absolute;
     width: 24px;
     height: 26px;
     left: 176px;
-    top: 490px;
+    top: 502px;
 
     font-family: Bakso Sapi;
     font-style: normal;
@@ -228,94 +214,51 @@ input::placeholder {
 
 .third_party_sign_in {
     position: absolute;
-    width: 100px;
-    height: 17px;
-    left: 30px;
-    top: 525px;
 }
 
 #sign_in_with_text {
+    position: relative;
+    width: 100px;
+    height: 17px;
+    left: 40px;
+    top: 540px;
+
     font-family: Bakso Sapi;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
     line-height: 19px;
 
+    color: #6A593E;
+
 }
 
-.link-group {
-    position: absolute;
-    width: 185px;
+.link_group {
+    position: relative;
+    width: 37.24px;
     height: 37.24px;
-    left: 66px;
+    left: 50px;
+    top: 529px;
     display: flex;
 }
 
 .link-group-item {
-    flex: 1;
+    margin-left: 10px;
 }
 
-#wechat-bg {
+.back {
     position: absolute;
-    width: 37.24px;
-    height: 37.24px;
-}
+    width: 206px;
+    height: 19px;
+    left: 85px;
+    top: 732px;
 
-#wechat-v {
-    position: absolute;
-    left: 21px;
-    top: 20%;
-    z-index: 1;
-}
+    font-family: Bakso Sapi;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
 
-.weibo-icon{
-    margin-left: 15px;
-}
-
-#weibo-bg {
-    position: absolute;
-    width: 37.24px;
-    height: 37.24px;
-}
-
-#weibo-v {
-    position: absolute;
-    left: 21px;
-    top: 20%;
-    z-index: 1;
-}
-
-.facebook-icon{
-    margin-left: 15px;
-}
-
-#facebook-bg {
-    position: absolute;
-    width: 37.24px;
-    height: 37.24px;
-}
-
-#facebook-v {
-    position: absolute;
-    left: 26px;
-    top: 15%;
-    z-index: 1;
-}
-
-.instagram-icon{
-    margin-left: 15px;
-}
-
-#instagram-bg {
-    position: absolute;
-    width: 37.24px;
-    height: 37.24px;
-}
-
-#instagram-v {
-    position: absolute;
-    left: 21px;
-    top: 20%;
-    z-index: 1;
+    color: #E08F62;
 }
 </style>

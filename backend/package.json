@@ -8,6 +8,7 @@
   "main": "index.js",
   "author": "TumTum-group",
   "dependencies": {
+    "@sendgrid/mail": "^7.2.6",
     "axios": "^0.20.0",
     "bcrypt": "^5.0.0",
     "koa": "^2.13.0",
@@ -19,7 +20,8 @@
     "mariadb": "^2.4.2",
     "moment": "^2.29.0",
     "mysql2": "^2.1.0",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "twilio": "^3.49.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

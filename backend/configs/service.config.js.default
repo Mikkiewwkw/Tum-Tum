@@ -1,11 +1,10 @@
 'use strict'
 
-const Rapid_SendGrid = {
+const email = {
 };
 
-const Rapid_SMS = {
+const SMS = {
 };
 
-module.exports.sendEmail = Rapid_SendGrid;
-module.exports.sendSMS = Rapid_SMS;
-
+module.exports.sendEmail = email;
+module.exports.sendSMS = SMS;

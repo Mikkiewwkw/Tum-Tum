@@ -8,11 +8,12 @@
         ref="theimg"
 
       >
-        <div v-if="theIndex != item.index">
-          <img :src="item.url"/>
+        <div :class="{active: theIndex == item.index}">
+          <transition>
+            <img :src="item.url"/>
+          </transition>
         </div>
 
-        <div v-else class="set-div"></div>
       </swiper-slide>
     </swiper>
   </div>
@@ -47,6 +48,7 @@ export default {
         freeMode: true,
         loop: true,
         speed: 2000,
+        loopedSlides :5,
         on: {
           slideChange: debouncs(function() {
             console.log(this);
@@ -76,16 +78,16 @@ export default {
     position: relative;
     width: 100%;
   }
+  .siper-item {
+    height: 400px;
+  }
   .siper-item img {
     width: 130px;
     height: 130px;
+
   }
-  .active img {
-    opacity:0.0;
+  .active {
+    position: relative;
+    top: 30%;
   }
-  /*.set-div {*/
-  /*  width: 130px;*/
-  /*  height: 130px;*/
-  /*  background: red;*/
-  /*}*/
 </style>

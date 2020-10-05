@@ -3,10 +3,11 @@
     <div class="header-content">
       MEET YOUR BUDDY
     </div>
+    <div></div>
     <avatar-swiper class="the-swiper" :buddies="buddies" @active="theFunction"></avatar-swiper>
-    <div class="show">
-      <img :src="buddies[theIndex].url">
-    </div>
+<!--    <div class="show">-->
+<!--      <img :src="buddies[theIndex].url">-->
+<!--    </div>-->
   </div>
 </template>
 

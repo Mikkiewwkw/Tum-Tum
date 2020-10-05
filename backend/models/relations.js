@@ -16,4 +16,14 @@ module.exports = ((models) => {
     models.Buddy,
     { foreignKey: { allowNull: false }, onDelete: 'CASCADE' }
   );
+
+  // Relation Table for User and Social - Many to Many
+  models.User.belongsToMany(
+    models.Social, 
+    { through: models.User_Social }
+  );
+  models.Social.belongsToMany(
+    models.User, 
+    { through: models.User_Social }
+  );
 });

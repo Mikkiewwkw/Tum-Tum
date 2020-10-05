@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 const Login = () => import("../views/Login/Login");
 const CreateCount = () => import("../views/Login/childComponts/CreateCount");
 const OldUserLogin = () => import("../views/Login/childComponts/OldUserLogin");
+const ForgotPassword = () => import("../views/Login/childComponts/ForgotPassword");
 const Intro = () => import("../views/Login/childComponts/Intro");
 const Avatar = () => import("../views/Avatar/Avatar")
 
@@ -27,6 +28,11 @@ const routes = [{
         path: "/userlogin",
         name: "UserLogIn",
         component: OldUserLogin,
+    },
+    {
+        path: "/forgotPassword",
+        name: "ForgotPassword",
+        component: ForgotPassword,
     },
     {
         path: "/intro",

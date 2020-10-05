@@ -7,6 +7,12 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
+    tid: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      unique: true,
+      allowNull: false
+    },
     firstname: {
       type: DataTypes.STRING,
       allowNull: false
@@ -19,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
-    nickname: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -27,10 +33,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    // Either email or phone, or both
     email: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false
+      allowNull: true,
+      validate: {
+        isEmail: true,
+      }
+    },
+    phone: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: true
     },
     // FK to Buddy table
     // buddyId: {
@@ -62,6 +77,17 @@ module.exports = (sequelize, DataTypes) => {
     extra: {
       type: DataTypes.JSON,
       allowNull: true
+    }
+  }, {
+    validate: {
+      isEmailOrPhoneFilled () {
+        if ((this.email === undefined || this.email === null || this.email.length == 0) && 
+	    (this.phone === undefined || this.phone === null || this.phone.length == 0)) {
+	  let err = new Error('Either email or phone number is required.');
+	  err.name = 'MissingInfoError';
+	  throw err;
+	}
+      }
     }
   });
 }

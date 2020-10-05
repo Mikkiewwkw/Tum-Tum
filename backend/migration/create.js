@@ -12,6 +12,7 @@ const init = require('./initialization');
   
     await init.buddy(model);
     await init.user(model, config);
+    await init.social(model);
   } catch (err) {
     console.log(err);
   }

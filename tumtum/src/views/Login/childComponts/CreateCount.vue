@@ -37,7 +37,10 @@
         placeholder="PASSWORD(8+CHARACTER)"
       />
     </div>
-    <div class="login">ALREADY HAVE AN ACCOUNT? <span v-on:click="login" style="color: #E08F62;">LOGIN</span></div>
+    <div class="login">
+      ALREADY HAVE AN ACCOUNT?
+      <span v-on:click="login" style="color: #e08f62">LOGIN</span>
+    </div>
     <div class="agreements">
       <div>BY CONTINUING, YOU AGREE TO TUMTUM'S</div>
       <div>
@@ -51,27 +54,35 @@
       </div>
     </div>
     <button class="begin_button" @click="beginClick">BEGIN</button>
-    <toast :isShow="isShow">
-      <toast-item
-        class="toast-item"
-        slot="the-toast"
-        @toastback="toastback"
-      ></toast-item>
-    </toast>
+    <div
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+      class="toast"
+      data-autohide="false"
+    >
+      <div class="toast-header">
+        <strong class="mr-auto">Bootstrap</strong>
+        <small>11 mins ago</small>
+        <button
+          type="button"
+          class="ml-2 mb-1 close"
+          data-dismiss="toast"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">Hello, world! This is a toast message.</div>
+    </div>
   </div>
 </template>
 
 <script>
 import { NewAccount } from "../../../common/utils";
-import Toast from "@/components/common/toast/Toast";
-import ToastItem from "./toastItem/ToastItem";
 
 export default {
   name: "CreateCount",
-  components: {
-    Toast,
-    ToastItem,
-  },
   data() {
     return {
       picture: [
@@ -83,8 +94,6 @@ export default {
         email: "",
         pwd: "",
       },
-      isShow: false,
-      isBack: false,
     };
   },
   methods: {
@@ -98,13 +107,9 @@ export default {
       console.log("PRIVACY_POLICY");
     },
     beginClick() {
+      console.log("beginClick");
       let account = new NewAccount(this.accountInfo);
-      this.isShow = true;
-    },
-    toastback() {
-      this.isBack = true;
-      this.isShow = false;
-      console.log("GO BACK !!!");
+      $(".toast").toast("show");
     },
   },
 };
@@ -219,9 +224,9 @@ input::placeholder {
   color: #4a4a4a;
 }
 
-.toast-item {
+/* .toast-item {
   position: absolute;
   left: 8%;
   top: 25%;
-}
+} */
 </style>

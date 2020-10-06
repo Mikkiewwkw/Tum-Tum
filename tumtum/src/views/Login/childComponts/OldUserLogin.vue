@@ -23,16 +23,16 @@
         <p class="" id="sign_in_with_text">SIGN IN WITH</p>
         <div class="link_group">
             <div id="wechat" class="link-group-item wechat-icon">
-                <img :src="svg.wechat.url" alt="wechat" v-on:click={wechatLogin}>
+                <img :src="svg.wechat.url" alt="wechat" v-on:click="wechatLogin">
             </div>
             <div id="weibo" class="link-group-item weibo-icon">
-                <img :src="svg.weibo.url" alt="weibo" v-on:click={weiboLogin}>
+                <img :src="svg.weibo.url" alt="weibo" v-on:click="weiboLogin">
             </div>
             <div id="facebook" class="link-group-item facebook-icon">
-                <img :src="svg.facebook.url" alt="facebook" v-on:click={facebookLogin}>
+                <img :src="svg.facebook.url" alt="facebook" v-on:click="facebookLogin">
             </div>
             <div id="instagram" class="link-group-item instagram-icon">
-                <img :src="svg.ins.url" alt="instagram" v-on:click={insLogin}>
+                <img :src="svg.ins.url" alt="instagram" v-on:click="insLogin">
             </div>
         </div>
     </div>

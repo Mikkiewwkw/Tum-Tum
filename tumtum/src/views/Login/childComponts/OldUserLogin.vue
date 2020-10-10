@@ -10,7 +10,7 @@
           class="input"
           type="text"
           name="email"
-          v-model="accountInfo.email"
+          v-model="accountInfo.username"
           placeholder="EMAIL/USERNAME/PHONE NUMBER"
         />
       </div>
@@ -19,7 +19,7 @@
           class="input"
           type="text"
           name="pwd"
-          v-model="accountInfo.pwd"
+          v-model="accountInfo.password"
           placeholder="PASSWORD"
         />
       </div>
@@ -76,8 +76,8 @@ export default {
       accountInfo: {
         fn: "",
         ln: "",
-        email: "",
-        pwd: "",
+        username: "",
+        password: "",
       },
     };
   },
@@ -85,7 +85,9 @@ export default {
     loginClick: function () {
       console.log("You clicked log in");
       console.log(this.accountInfo);
-      login(this.accountInfo);
+      login(this.accountInfo).then(res => {
+        console.log(res);
+      });
     },
     forgotPassword: function () {
       this.$router.push("/forgotPassword");

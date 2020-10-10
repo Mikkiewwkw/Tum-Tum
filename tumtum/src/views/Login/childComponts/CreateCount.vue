@@ -110,6 +110,7 @@ export default {
       console.log("beginClick");
       let account = new NewAccount(this.accountInfo);
       $(".toast").toast("show");
+      this.$router.push("/intro");
     },
   },
 };

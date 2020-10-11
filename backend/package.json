@@ -8,15 +8,21 @@
   "main": "index.js",
   "author": "TumTum-group",
   "dependencies": {
+    "@sendgrid/mail": "^7.2.6",
+    "axios": "^0.20.0",
     "@koa/cors": "^3.1.0",
     "bcrypt": "^5.0.0",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
+    "koa-generic-session": "^2.1.1",
     "koa-jwt": "^4.0.0",
+    "koa-redis": "^4.0.1",
     "koa-router": "^9.4.0",
     "mariadb": "^2.4.2",
+    "moment": "^2.29.0",
     "mysql2": "^2.1.0",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "twilio": "^3.49.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

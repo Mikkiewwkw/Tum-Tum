@@ -10,6 +10,13 @@ const { Sequelize } = require('sequelize');
 // Load Configurations
 const globalConfig = require('./configs');
 
+// Register session store to redis
+// const session = require('koa-generic-session'),
+//       cache = require('./libs/cache');
+// app.use(session({
+//   store: cache.store,
+// }));
+
 // Load Koa Bodyparser
 const bodyParser = require('koa-bodyparser');
 app.use(bodyParser());

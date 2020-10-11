@@ -1,0 +1,10 @@
+'use strict'
+
+const email = {
+};
+
+const SMS = {
+};
+
+module.exports.sendEmail = email;
+module.exports.sendSMS = SMS;

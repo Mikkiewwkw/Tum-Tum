@@ -32,7 +32,7 @@ router
         // TODO: probably add email/phone check before retrieval
         if ((password == undefined || password == '') || 
             (username == undefined || username == '')) {
-          let error = new Error('Invalid Input');
+          let error = new Error('Invalid inputs.');
           error.name = 'InvalidInputError';
           throw error;
         }
@@ -114,30 +114,63 @@ router
       let err = new Error(),
           errInvalidInput = err;
    
-      errInvalidInput.message = 'Invalid Input';
+      errInvalidInput.message = 'Invalid inputs.';
       errInvalidInput.name = 'InvalidInputError';
 
       // Redis data format: key -> value
       // operation:'email'/'phone'/'username':content -> 
       // [ token/validation code, createdAt, expiredAt ]
-      if (data && query && query.from) {
-        let key = '', llen = 0;
-        if (query.from == 'email' && data.email && true) {
-          key = `signup:email:${data.email}`;
-	  // TODO: EMAIL && PHONE VALIDATION
-          // TODO: Check if already registered here
-	} else if (query.from == 'phone' && data.phone && true) {
-          key = `signup:phone:${data.phone}`;
+      if (data && data.sendto) {
+        let sendto = data.sendto,
+            mode = undefined;
+
+        let countAtSym = 0, validPhoneNum = true;
+        if (sendto && typeof sendto == 'string') {
+          for (let i = 0;i < sendto.length; ++i) {
+            let ch = sendto[i];
+            if (ch == '@') countAtSym++; 
+            if (validPhoneNum && !((ch == '+') || (ch >= '0' && ch <= '9'))) 
+              validPhoneNum = false;
+            if (countAtSym >= 2) break;
+	  }
+     
+          if (countAtSym == 1) {
+            mode = 'email';
+          } else if (countAtSym == 0 && validPhoneNum) {
+            mode = 'phone';
+            sendto = parseInt(sendto);
+          }
+	} 
+
+        let key = '', llen = 0, user = undefined;
+        if (mode == 'email' && sendto && true) {
+          key = `signup:email:${sendto}`;
+          user = await User.findOne({ where: { email: sendto } }); 
+	} else if (mode == 'phone' && sendto && true) {
+          key = `signup:phone:${sendto}`;
+          user = await User.findOne({ where: { phone: sendto } }); 
 	} else {
           throw errInvalidInput;
 	}
 
-	
-        let validationCode = Math.floor(100000 + Math.random() * 900000),
+        if (user) {
+          let userInfoDuplicateError = err;
+          userInfoDuplicateError.name = 'UserInfoDuplicateError';
+          userInfoDuplicateError.message = 
+            `${mode[0].toUpperCase()}${mode.slice(1)} has been used.`;
+          throw userInfoDuplicateError;
+        }
+        return;
+
+        let validationCode = Math.floor(1000 + Math.random() * 9000),
             createdAt = moment().unix(),
             expiredAt = createdAt + parseInt(configs.site.signupExpireIn);
 
         // Update redis
+        let errCache = err;
+        errCache.message = 'Failed to operate the cache server.';
+        errCache.name = 'CacheOperationFailedError';
+
 	llen = await cacheStore.client.llen(key);
 	if (llen == 3) {
           let prevSentAt = await cacheStore.client.lindex(key, 1);
@@ -157,36 +190,35 @@ router
 	    }
             
             if (res != 'OK') {
-              // TODO: throw error here
-              console.log(res);
-	      console.log('Fail!');
+              throw errCache;
 	    }
 	  }
 	} else {
           let res = await cacheStore.client.rpush(key, [validationCode, createdAt, expiredAt]);  
           if (res < 3) { 
-            // TODO: throw error here
-            console.log('fail!');
+            throw errCache;
 	  }
 	}
 
         let sendMsg = `Welcome to TumTum! Your validation code is ${validationCode}. This code will be expired in ${Math.floor(parseInt(configs.site.signupExpireIn) / 60)} minutes.`;
 	// Send code
-        if (query.from == 'email') {
+        if (mode == 'email') {
           let res = await emailService.sendEmail({
             //"from": "welcome@tumtum.dev",
             "from": "tumtum-welcome@nyanpasu.me",
-            "to": [ data.email ],
+            "to": [ sendto ],
             "subject": "Please use the attached validation code to finish your registration",
             "content": sendMsg
 	  });
-	} else if (query.from == 'phone') {
+	} else if (mode == 'phone') {
           let res = await SMSService.sendSMS({
-            "to": data.phone,
+            "to": sendto,
             "content": sendMsg
 	  });
          //console.log(res);
 	}
+
+        // TODO: probably return a operation token
         ctx.body.data = {
           "status": "success"
         };
@@ -199,11 +231,16 @@ router
           "status": "failed",
           "message": error.message
         };
+      } else if (error.name == 'UserInfoDuplicateError') {
+        ctx.body.data = {
+          "status": "failed",
+          "message": error.message
+        };
       } else {
         console.log(error);
         ctx.body.data = {
           "status": "failed",
-          "message": "Invalid inputs."
+          "message": error.message
         }
       }
     }

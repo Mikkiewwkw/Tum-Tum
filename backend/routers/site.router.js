@@ -160,7 +160,6 @@ router
             `${mode[0].toUpperCase()}${mode.slice(1)} has been used.`;
           throw userInfoDuplicateError;
         }
-        return;
 
         let validationCode = Math.floor(1000 + Math.random() * 9000),
             createdAt = moment().unix(),

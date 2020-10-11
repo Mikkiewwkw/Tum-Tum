@@ -14,4 +14,6 @@ export default {
 body {
   background: #f6f0e0;
 }
+@import'~bootstrap/dist/css/bootstrap.css';
+@import '~bootstrap-vue/dist/bootstrap-vue.css';
 </style>

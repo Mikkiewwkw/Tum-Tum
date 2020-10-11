@@ -21,6 +21,10 @@ const globalConfig = require('./configs');
 const bodyParser = require('koa-bodyparser');
 app.use(bodyParser());
 
+// Load Koa CORS
+const koaCORS = require('@koa/cors');
+app.use(koaCORS());
+
 // Load Routers and add routers to Koa
 const routers = require('./routers');
 app.use(routers.routes());
